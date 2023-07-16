@@ -25,9 +25,10 @@ module.exports = {
       url: "https://polygon-mainnet.g.alchemy.com/v2/nAhiCHKvZkhkp4A7PkkCIBON0-BXW26d",
       //accounts: [process.env.privateKey]
     },
-    goerli: {
-      url: process.env.REACT_APP_ALCHEMY_API_URL,
-      accounts: [ process.env.REACT_APP_PRIVATE_KEY ]
+    sepolia: {
+      url: 'https://eth-sepolia.g.alchemy.com/v2/RkNfbkHBTZ8dA93bvLJNOsNa_wbWJ-Ec',
+      chainId: 11155111,
+      accounts: [ "ef4eb167c47a0cf4642aee3dc58b28ed8ae004d83cf467435baaacd8bb0e2d4d" ]
     }
   },
   solidity: {

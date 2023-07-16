@@ -1,5 +1,6 @@
 import logo from '../logo_3.png';
 import fullLogo from '../full_logo.png';
+import logo1 from '../logoMain.png';
 import {
   BrowserRouter as Router,
   Switch,
@@ -37,12 +38,22 @@ function updateButton() {
 async function connectWebsite() {
 
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if(chainId !== '0x5')
+    if(chainId !== '0xaa36a7')
     {
       //alert('Incorrect network! Switch your metamask network to Rinkeby');
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x5' }],
+        params: [{ 
+          chainId: '0xaa36a7',
+          // chainName: 'Sepolia',
+          // nativeCurrency: {
+          //   name: 'Sepolia',
+          //   symbol: 'SEPO',
+          //   decimals: 18,
+          // },
+          // rpcUrls: ['https://eth-sepolia.g.alchemy.com/v2/RkNfbkHBTZ8dA93bvLJNOsNa_wbWJ-Ec'],
+          // blockExplorerUrls: [],
+      }],
      })
     }  
     await window.ethereum.request({ method: 'eth_requestAccounts' })
@@ -71,31 +82,33 @@ async function connectWebsite() {
     })
   });
 
+  
+
     return (
       <div className="">
-        <nav className="w-screen">
-          <ul className='flex items-end justify-between py-3 bg-transparent text-white pr-5'>
-          <li className='flex items-end ml-5 pb-2'>
+        <nav className="w-[100%]">
+          <ul className='flex items-center justify-between py-3 bg-transparent text-white px-5 '>
+          <li className='flex items-center  pb-2'>
             <Link to="/">
-            <img src={fullLogo} alt="" width={120} height={120} className="inline-block -mt-2"/>
-            <div className='inline-block font-bold text-xl ml-2'>
+            <img src={logo1} alt="logo" width={90} height={90} className="inline-block"/>
+            <div className='inline-block font-bold text-xl ml-7'>
               NFT Marketplace
             </div>
             </Link>
           </li>
-          <li className='w-2/6'>
-            <ul className='lg:flex justify-between font-bold mr-10 text-lg'>
+          <li className=''>
+            <ul className='lg:flex justify-between gap-3 font-bold text-lg'>
               {location.pathname === "/" ? 
-              <li className='border-b-2 hover:pb-0 p-2'>
+              <li className='border-b-2 p-2'>
                 <Link to="/">Marketplace</Link>
               </li>
               :
-              <li className='hover:border-b-2 hover:pb-0 p-2'>
+              <li className='hover:border-b-2 p-2'>
                 <Link to="/">Marketplace</Link>
               </li>              
               }
               {location.pathname === "/sellNFT" ? 
-              <li className='border-b-2 hover:pb-0 p-2'>
+              <li className='border-b-2 p-2'>
                 <Link to="/sellNFT">List My NFT</Link>
               </li>
               :
@@ -113,13 +126,13 @@ async function connectWebsite() {
               </li>              
               }  
               <li>
-                <button className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm" onClick={connectWebsite}>{connected? "Connected":"Connect Wallet"}</button>
+                <button className="enableEthereumButton bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-1 rounded text-sm" onClick={connectWebsite}>{connected? "Connected":"Connect Wallet"}</button>
               </li>
             </ul>
           </li>
           </ul>
         </nav>
-        <div className='text-white text-bold text-right mr-10 text-sm'>
+        <div className='text-white text-bold text-right mr-5 text-sm'>
           {currAddress !== "0x" ? "Connected to":"Not Connected. Please login to view NFTs"} {currAddress !== "0x" ? (currAddress.substring(0,15)+'...'):""}
         </div>
       </div>
